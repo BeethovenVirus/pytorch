@@ -605,7 +605,9 @@ protected:
   // if you are going to preserve it.
   virtual void cloneFrom(Node * s) {
     setSourceLocation(s->getSourceLocation());
-    scope_ = s->scope_;
+    if (s->owningGraph() == owningGraph()) {
+      scope_ = s->scope_;
+    }
     copyAttributes(*s);
   }
 };
